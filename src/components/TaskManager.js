@@ -13,7 +13,7 @@ const TaskManager = () => {
   const fetchTasks = async () => {
     const token = localStorage.getItem('token'); // Get token from local storage or state
     try {
-      const response = await axios.get('http://localhost:5000/tasks', {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks(response.data);
@@ -25,7 +25,7 @@ const TaskManager = () => {
   const addTask = async (task) => {
     const token = localStorage.getItem('token'); // Get token from local storage or state
     try {
-      await axios.post('http://localhost:5000/addtask', task, {
+      await axios.post(`${process.env.REACT_APP_API_URL}/addtask`, task, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchTasks(); // Refresh tasks after adding a new one
