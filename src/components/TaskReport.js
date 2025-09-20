@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { jsPDF } from 'jspdf';
 import { TaskContext } from '../context/TaskContext';
 import '../css/TaskReport.css';
@@ -8,11 +8,11 @@ const TaskReport = () => {
     const [todayTasks, setTodayTasks] = useState([]);
     const [selectedTaskIds, setSelectedTaskIds] = useState([]); // State to track selected task IDs
 
-    // Function to get tasks for today
-    const getTodayTasks = () => {
+    // Function to get tasks for today - wrapped with useCallback
+    const getTodayTasks = useCallback(() => {
         const today = new Date().toDateString();
         return tasks.filter((task) => new Date(task.reminderTime).toDateString() === today);
-    };
+    }, [tasks]); // Add tasks as a dependency
 
     // Function to generate PDF report
     const generatePDF = () => {
@@ -50,7 +50,8 @@ const TaskReport = () => {
     useEffect(() => {
         const todayTasksList = getTodayTasks();
         setTodayTasks(todayTasksList);
-    }, [tasks]);
+    }, [getTodayTasks, tasks]); // Add getTodayTasks to the dependency array
+
     return (
         <div className='TaskReport-container'>
             <h2>Today's Task Report</h2>
