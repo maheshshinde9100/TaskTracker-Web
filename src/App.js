@@ -281,6 +281,7 @@ import DefaultPage from './components/DefaultPage';
 import Profile from './components/Profile';
 import TaskCalendar from './components/TaskCalendar';
 import TaskReport from './components/TaskReport'; // Import TaskReport
+import Developer from './components/Developer'; // Import Developer component
 import { TaskProvider } from './context/TaskContext'; // Import TaskProvider
 import './App.css';
 
@@ -345,6 +346,10 @@ const App = () => {
                         <Route
                             path="/profile"
                             element={isLoggedIn ? <Profile /> : <Navigate to="/defaultpage" />}
+                        />
+                                                <Route
+                            path="/developer"
+                            element={<Developer />} // Developer Route
                         />
                         <Route
                             path="*"

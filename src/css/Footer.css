@@ -12,3 +12,14 @@
     margin: 0;
     font-size: 14px;
 }
+
+.footer-link {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
